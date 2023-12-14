@@ -31,7 +31,7 @@ app.listen(port, () => {
 
 // is used to check whether a user is authinticated
 app.get('/auth/authenticate', async(req, res) => {
-    console.log('authentication request has been arrived');
+    console.log('Authentication request has been arrived');
     const token = req.cookies.jwt; // assign the token named jwt to the token const
     //console.log("token " + token);
     let authenticated = false; // a user is not authenticated until proven the opposite
@@ -41,12 +41,12 @@ app.get('/auth/authenticate', async(req, res) => {
             await jwt.verify(token, secret, (err) => { //token exists, now we try to verify it
                 if (err) { // not verified, redirect to login page
                     console.log(err.message);
-                    console.log('token is not verified');
-                    res.send({ "authenticated": authenticated }); // authenticated = false
+                    console.log('Token is not verified');
+                    res.send({ "Authenticated": authenticated }); // authenticated = false
                 } else { // token exists and it is verified 
-                    console.log('author is authinticated');
+                    console.log('Author is authenticated');
                     authenticated = true;
-                    res.send({ "authenticated": authenticated }); // authenticated = true
+                    res.send({ "Authenticated": authenticated }); // authenticated = true
                 }
             })
         } else { //applies when the token does not exist
@@ -62,7 +62,7 @@ app.get('/auth/authenticate', async(req, res) => {
 // signup a user
 app.post('/auth/signup', async(req, res) => {
     try {
-        console.log("a signup request has arrived");
+        console.log("A signup request has arrived");
         //console.log(req.body);
         const { email, password } = req.body;
 
@@ -89,7 +89,7 @@ app.post('/auth/signup', async(req, res) => {
 
 app.post('/auth/login', async(req, res) => {
     try {
-        console.log("a login request has arrived");
+        console.log("A login request has arrived");
         const { email, password } = req.body;
         const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
         if (user.rows.length === 0) return res.status(401).json({ error: "User is not registered" });
@@ -122,6 +122,105 @@ app.post('/auth/login', async(req, res) => {
 
 //logout a user = deletes the jwt
 app.get('/auth/logout', (req, res) => {
-    console.log('delete jwt request arrived');
+    console.log('Logout request arrived');
     res.status(202).clearCookie('jwt').json({ "Msg": "cookie cleared" }).send
 });
+
+app.post('/api/createPost', async (req, res) => {
+    try {
+        // Extract data from the request body
+        const { body, date } = req.body;
+
+        // TODO: Perform any necessary validation on the input data
+
+        // Example: Insert the post into the database
+        const newPost = await pool.query(
+            "INSERT INTO posts(body, date) VALUES ($1, $2) RETURNING *",
+            [body, date]
+        );
+
+        // TODO: You may want to do additional processing or error checking
+
+        res.status(201).json(newPost.rows[0]);
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).json({ error: error.message });
+    }
+});
+
+app.put('/api/updatePost/:postId', async (req, res) => {
+    try {
+        const { body, date } = req.body;
+        const postId = req.params.postId;
+
+        // TODO: Perform any necessary validation on the input data
+
+        // Example: Update the post in the database
+        const updatedPost = await pool.query(
+            "UPDATE posts SET body = $1, date = $2 WHERE id = $3 RETURNING *",
+            [body, date, postId]
+        );
+
+        // TODO: You may want to do additional processing or error checking
+
+        res.status(200).json(updatedPost.rows[0]);
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).json({ error: error.message });
+    }
+});
+
+app.delete('/api/deletePost/:postId', async (req, res) => {
+    try {
+        const postId = req.params.postId;
+
+        // Example: Delete the post from the database
+        const deletedPost = await pool.query(
+            "DELETE FROM posts WHERE id = $1 RETURNING *",
+            [postId]
+        );
+
+        // TODO: You may want to do additional processing or error checking
+
+        res.status(200).json(deletedPost.rows[0]);
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).json({ error: error.message });
+    }
+});
+
+app.get('/api/receivePosts', async (req, res) => {
+    try {
+        console.log("Before query execution");
+        const posts = await pool.query("SELECT * FROM posts");
+        console.log("After query execution");
+    
+        // Log the SQL query
+        console.log("SQL Query:", "SELECT * FROM posts");
+    
+        res.status(200).json(posts.rows);
+    } catch (error) {
+        console.error("Error in try-catch block:", error.message);
+        res.status(400).json({ error: error.message });
+    }    
+});
+// Fetch a single post by ID
+app.get('/api/receivePost/:postId', async (req, res) => {
+    try {
+        const postId = req.params.postId;
+
+        // Example: Retrieve the post from the database by ID
+        const post = await pool.query("SELECT * FROM posts WHERE id = $1", [postId]);
+
+        // Check if the post with the given ID exists
+        if (post.rows.length === 0) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        res.status(200).json(post.rows[0]);
+    } catch (error) {
+        console.error("Error in try-catch block:", error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+

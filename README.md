@@ -1,17 +1,4 @@
-# WAD2023-Lab13-Backend
-
-## Pre-requisites
-Node.js \& NPM
-
-## Clone the repository
-```
-git clone https://github.com/M-Gharib/WAD2023-Lab13-Backend.git
-```
-
-## Navigate to the project directory
-```
-cd <project name>
-```
+## Database for homework 4
 
 ## Install dependencies
 ```
