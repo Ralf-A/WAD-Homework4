@@ -189,6 +189,20 @@ app.delete('/api/deletePost/:postId', async (req, res) => {
     }
 });
 
+app.delete('/api/deleteAllPosts', async (req, res) => {
+    try {
+        // Example: Delete all posts from the database
+        const deletedPosts = await pool.query("DELETE FROM posts RETURNING *");
+
+        // TODO: You may want to do additional processing or error checking
+
+        res.status(200).json(deletedPosts.rows);
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).json({ error: error.message });
+    }
+});
+
 app.get('/api/receivePosts', async (req, res) => {
     try {
         console.log("Before query execution");
