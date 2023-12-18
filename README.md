@@ -1,16 +1,30 @@
-## Database for homework 4
-
-## Install dependencies
+## Project setup
 ```
 npm install
 ```
 
-## Run the project
+### Database info
 ```
-npm start
+Complete the information related to your database (db name, password) in the database.js file that is in the ../server directory
 ```
 
-or 
+### Run the Back-end
 ```
-npm server.js
+npm run server
 ```
+
+### Run the Front-End with hot reload
+```
+npm run serve
+```
+
+### Open Cypress 
+```
+npx cypress open
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
