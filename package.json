@@ -1,8 +1,7 @@
 {
-  "name": "nodejs-3x",
-  "version": "1.0.0",
+  "name": "vuejs-ii",
+  "version": "0.1.0",
   "description": "",
-  "main": "server/database.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
@@ -19,6 +18,15 @@
     "jsonwebtoken": "^8.5.1",
     "node": "^21.2.0",
     "nodemon": "^2.0.20",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "vue-router": "^4.2.5",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli": "^5.0.8",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "@vue/cli-service": "~5.0.0"
   }
 }
