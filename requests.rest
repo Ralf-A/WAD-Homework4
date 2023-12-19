@@ -1,22 +1,160 @@
-### signup a user
-POST http://localhost:3000/auth/signup
+### Authentication
+### Authenticate User
+URL: /auth/authenticate
+Method: GET
+Description: Authenticates a user.
+Controller: authController.authenticateUser
+
+### Sign Up
+URL: /auth/signup
+Method: POST
+Description: Creates a new user account.
+Controller: authController.signupUser
+Request:
+POST /auth/signup
+
 Content-Type: application/json
+Request Body:
 
-  {
-    "email": "user@ee",
-    "password": "user"
-  }
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+Response:
+{
+  "user_id": "1234567890"
+}
 
-### login a user
-POST http://localhost:3000/auth/login
+### Log In
+URL: /auth/login
+Method: POST
+Description: Logs in a user.
+Controller: authController.loginUser
+Request:
+POST /auth/login
+
 Content-Type: application/json
+Request Body:
 
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+Response:
+{
+  "user_id": "1234567890"
+}
+
+### Log Out
+URL: /auth/logout
+Method: GET
+Description: Logs out a user.
+Controller: authController.logoutUser
+Request:
+GET /auth/logout
+
+Response:
+{
+  "Msg": "cookie cleared"
+}
+
+### Create a Post
+URL: /api/createPost
+Method: POST
+Description: Creates a new expense post.
+Controller: expenseController.createPost
+Request:
+POST /api/createPost
+
+Content-Type: application/json
+Request Body:
+
+{
+  "body": "Expense details.",
+  "date": "2023-12-19T12:00:00Z"
+}
+Response:
+
+{
+  "id": "9876543210",
+  "body": "Expense details.",
+  "date": "2023-12-19T12:00:00Z"
+}
+
+### Update a Post
+URL: /api/updatePost/{postId}
+Method: PUT
+Description: Updates an existing expense post.
+Controller: expenseController.updatePost
+Request:
+PUT /api/updatePost/9876543210
+
+Content-Type: application/json
+Request Body:
+
+{
+  "body": "Updated expense details.",
+  "date": "2023-12-19T15:30:00Z"
+}
+Response:
+
+{
+  "id": "9876543210",
+  "body": "Updated expense details.",
+  "date": "2023-12-19T15:30:00Z"
+}
+
+### Delete a Post
+URL: /api/deletePost/{postId}
+Method: DELETE
+Description: Deletes an expense post.
+Controller: expenseController.deletePost
+Request:
+DELETE /api/deletePost/9876543210
+
+### Delete All Posts
+URL: /api/deleteAllPosts
+Method: DELETE
+Description: Deletes all posts.
+Controller: expenseController.deleteAllPosts
+Request:
+DELETE /api/deleteAllPosts
+
+### Receive All Posts
+URL: /api/receivePosts
+Method: GET
+Description: Retrieves all expense posts.
+Controller: expenseController.receivePosts
+Request:
+GET /api/receivePosts
+
+Response:
+
+[
   {
-    "email": "user@ee",
-    "password": "user"
+    "id": "9876543210",
+    "body": "Updated expense details.",
+    "date": "2023-12-19T15:30:00Z"
+  },
+  {
+    "id": "8765432109",
+    "body": "Another expense.",
+    "date": "2023-12-20T10:45:00Z"
   }
+]
 
-###  Authinticate a user, this will not work for you unless you replace the token with one created for your user
-GET http://localhost:3000/auth/authenticate
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyMzEzMzU2LWY2ZDYtNDI1NS1hYzBmLWI4ZDdlNGZmYmUyMyIsImlhdCI6MTY2ODgwMjc0NywiZXhwIjoxNjY4ODA2MzQ3fQ.X2I_tHlpBJoES_brX43EEbx4uvlIDzzMU68FJvNVsXE
+### Receive a Single Post by ID
+URL: /api/receivePost/{postId}
+Method: GET
+Description: Retrieves a single expense post by ID.
+Controller: expenseController.receivePost
+Request:
+GET /api/receivePost/9876543210
 
+Response:
+
+{
+  "id": "9876543210",
+  "body": "Updated expense details.",
+  "date": "2023-12-19T15:30:00Z"
+}
