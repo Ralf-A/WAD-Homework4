@@ -44,14 +44,14 @@ app.get('/auth/authenticate', async(req, res) => {
                     console.log('Token is not verified');
                     res.send({ "Authenticated": authenticated }); // authenticated = false
                 } else { // token exists and it is verified 
-                    console.log('Author is authenticated');
+                    console.log('User is authenticated');
                     authenticated = true;
                     res.send({ "Authenticated": authenticated }); // authenticated = true
                 }
             })
         } else { //applies when the token does not exist
-            console.log('author is not authinticated');
-            res.send({ "authenticated": authenticated }); // authenticated = false
+            console.log('User is not authenticated');
+            res.send({ "Authenticated": authenticated }); // authenticated = false
         }
     } catch (err) {
         console.error(err.message);
@@ -127,6 +127,7 @@ app.get('/auth/logout', (req, res) => {
 });
 
 app.post('/api/createPost', async (req, res) => {
+    console.log('Create post request arrived');
     try {
         // Extract data from the request body
         const { body, date } = req.body;
@@ -149,6 +150,7 @@ app.post('/api/createPost', async (req, res) => {
 });
 
 app.put('/api/updatePost/:postId', async (req, res) => {
+    console.log('Update post request arrived');
     try {
         const { body, date } = req.body;
         const postId = req.params.postId;
@@ -171,6 +173,7 @@ app.put('/api/updatePost/:postId', async (req, res) => {
 });
 
 app.delete('/api/deletePost/:postId', async (req, res) => {
+    console.log('Delete post request arrived');
     try {
         const postId = req.params.postId;
 
@@ -190,6 +193,7 @@ app.delete('/api/deletePost/:postId', async (req, res) => {
 });
 
 app.delete('/api/deleteAllPosts', async (req, res) => {
+    console.log('Delete all posts request arrived');
     try {
         // Example: Delete all posts from the database
         const deletedPosts = await pool.query("DELETE FROM posts RETURNING *");
@@ -204,6 +208,7 @@ app.delete('/api/deleteAllPosts', async (req, res) => {
 });
 
 app.get('/api/receivePosts', async (req, res) => {
+    console.log('Receive all posts request arrived');
     try {
         console.log("Before query execution");
         const posts = await pool.query("SELECT * FROM posts");
@@ -220,6 +225,7 @@ app.get('/api/receivePosts', async (req, res) => {
 });
 // Fetch a single post by ID
 app.get('/api/receivePost/:postId', async (req, res) => {
+    console.log('Receive post request arrived');
     try {
         const postId = req.params.postId;
 

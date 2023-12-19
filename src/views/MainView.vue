@@ -1,9 +1,14 @@
 <template>
   <div>
     <div id="posts-container">
-      <button class="rounded-button" @click="logout">Logout</button>
+      <button class="rounded-button large-button" @click="logout">Logout</button>
+      
+      <div v-if="loading">
+        <!-- Loading indicator or message -->
+        Loading...
+      </div>
+
       <ul class="post-list" v-if="posts && posts.length">
-        <!-- Use router-link to make each post clickable -->
         <router-link
           v-for="post in posts"
           :key="post.id"
@@ -13,14 +18,13 @@
         </router-link>
       </ul>
 
-      <div v-if="loading">
-        <!-- Loading indicator or message -->
-        Loading...
+      <div class="button-container">
+        <router-link :to="{ name: 'AddPost' }">
+          <button class="rounded-button large-button">Add Post</button>
+        </router-link>
+
+        <button class="rounded-button large-button" @click="handleDeleteAllPosts">Delete All Posts</button>
       </div>
-      <router-link :to="{ name: 'AddPost' }">
-        <button class="rounded-button">Add Post</button>
-      </router-link>
-      <button class="rounded-button" @click="handleDeleteAllPosts">Delete All Posts</button>
     </div>
   </div>
 </template>
@@ -60,7 +64,7 @@ export default {
 </script>
 
 <style>
-  body {
+body {
   background-color: rgb(63, 63, 63);
   color: black;
 }
@@ -70,9 +74,7 @@ export default {
 }
 
 button {
-  background-color: lightblue;
-  color: black;
-  border-radius: 10px;
+  border: none;
 }
 
 .rounded-button {
@@ -80,8 +82,20 @@ button {
   background-color: lightblue;
   color: black;
   margin: 10px;
-  border: none;
   padding: 10px;
 }
 
+.large-button {
+  font-size: 16px; /* Adjust the font size as needed */
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+
+/* Add styles for positioning the buttons next to each other */
+.button-container button {
+  margin-right: 10px; /* Adjust the margin as needed */
+}
 </style>

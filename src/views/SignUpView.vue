@@ -32,28 +32,30 @@ export default {
   },
   methods: {
     async submitForm() {
-      // Password validation
-      const passwordValidationResult = validatePassword(this.password);
+  // Password validation
+  const passwordValidationResult = validatePassword(this.password);
 
-      if (passwordValidationResult !== 'Success') {
-        this.isPasswordValid = false;
-        this.validationMessage = passwordValidationResult;
-        return;
-      }
-
-      // Sign up logic
-      const { success, message } = await signupService.signUp(this.email, this.password);
-
-      if (success) {
-        // Redirect or show success message as needed
-        this.$router.push("/");
-      } else {
-        // Handle unsuccessful signup (display an error message, etc.)
-        this.validationMessage = message;
-      }
-    },
+  if (passwordValidationResult !== 'Success') {
+    this.isPasswordValid = false;
+    this.validationMessage = passwordValidationResult;
+    return;
   }
-};
+
+  // Sign up logic
+  const { success, message } = await signupService.signUp(this.email, this.password);
+  this.validationMessage = message;
+
+  if (success) {
+    // Redirect or show success message as needed
+    this.$router.push("/");
+  } else {
+    // Handle unsuccessful signup (display an error message, etc.)
+    this.validationMessage = message;
+  }
+},
+
+  }
+}
 </script>
 
 <style scoped>
@@ -63,7 +65,7 @@ export default {
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
   border-radius: 8px;
-  background-color: #fff;
+  background-color: rgb(63, 63, 63);
 }
 
 .login-form {

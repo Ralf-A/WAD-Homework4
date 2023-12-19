@@ -50,7 +50,7 @@ export default {
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
   border-radius: 8px;
-  background-color: #fff;
+  background-color: rgb(63, 63, 63);
 }
 
 .login-form {

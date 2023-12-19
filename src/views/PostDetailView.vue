@@ -2,7 +2,7 @@
   <div class="post-detail-container">
     <h1>Post Detail</h1>
     <div v-if="post" class="post-content">
-      <textarea v-model="updatedBody" class="post-textarea" readonly>{{ post.body }}</textarea>
+      <textarea v-model="updatedBody" class="post-textarea">{{ post.body }}</textarea>
       <p>Posted on: {{ formatDate(post.date) }}</p>
       <div class="button-container">
         <button @click="updatePost">Update</button>
