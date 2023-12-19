@@ -19,7 +19,7 @@ nav a {
     font-weight: bold;
     margin: 0px 10px 0px 10px;
     padding: 10px 40px 10px 40px;
-    color: #000000;
+    color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
     border-radius: 4px;
     transition: background-color 0.3s; /* Add transition for a smooth effect */

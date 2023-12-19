@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="posts-container">
-      <button @click="logout">Logout</button>
+      <button class="rounded-button" @click="logout">Logout</button>
       <ul class="post-list" v-if="posts && posts.length">
         <!-- Use router-link to make each post clickable -->
         <router-link
@@ -18,9 +18,9 @@
         Loading...
       </div>
       <router-link :to="{ name: 'AddPost' }">
-        <button>Add Post</button>
+        <button class="rounded-button">Add Post</button>
       </router-link>
-      <button @click="handleDeleteAllPosts">Delete All Posts</button>
+      <button class="rounded-button" @click="handleDeleteAllPosts">Delete All Posts</button>
     </div>
   </div>
 </template>
@@ -60,5 +60,28 @@ export default {
 </script>
 
 <style>
-  /* Add your styles if needed */
+  body {
+  background-color: rgb(63, 63, 63);
+  color: black;
+}
+
+.box {
+  background-color: lightgray;
+}
+
+button {
+  background-color: lightblue;
+  color: black;
+  border-radius: 10px;
+}
+
+.rounded-button {
+  border-radius: 10px;
+  background-color: lightblue;
+  color: black;
+  margin: 10px;
+  border: none;
+  padding: 10px;
+}
+
 </style>

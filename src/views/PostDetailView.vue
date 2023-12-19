@@ -2,7 +2,7 @@
   <div class="post-detail-container">
     <h1>Post Detail</h1>
     <div v-if="post" class="post-content">
-      <textarea v-model="updatedBody" class="post-textarea">{{ post.body }}</textarea>
+      <textarea v-model="updatedBody" class="post-textarea" readonly>{{ post.body }}</textarea>
       <p>Posted on: {{ formatDate(post.date) }}</p>
       <div class="button-container">
         <button @click="updatePost">Update</button>
@@ -71,6 +71,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
 }
 
 .post-content {
@@ -80,10 +81,22 @@ export default {
 .post-textarea {
   width: 100%;
   margin-bottom: 10px;
+  background-color: lightgray;
+  resize: none;
 }
 
 .button-container {
   display: flex;
   gap: 10px;
 }
+
+button {
+  border-radius: 10px;
+  background-color: lightblue;
+  color: black;
+  margin: 10px;
+  border: none;
+  padding: 10px;
+}
+
 </style>

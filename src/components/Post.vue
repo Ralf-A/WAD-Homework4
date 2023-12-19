@@ -39,6 +39,7 @@ export default {
   overflow: hidden;
   position: relative;
   z-index: 1;
+  background-color: lightgray;
 }
 
 .post-profile {
@@ -70,6 +71,7 @@ export default {
 .post-text {
   flex: 3;
   padding: 16px;
+  color: black;
 }
 
 .post-content {

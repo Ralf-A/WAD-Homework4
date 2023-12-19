@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h1>About Us</h1>
         <div class="contact-info">
+            <h1>About Us</h1>
             <p>Group AO</p>
             <p>Members:</p>
             <ul>
@@ -27,5 +27,7 @@ export default {
 
 
 <style>
-
+    .contact-info {
+        color: white;
+    }
 </style>
