@@ -10,7 +10,7 @@ Complete the information related to your database (db name, password) in the dat
 
 ### Run the Back-end
 ```
-npm run server
+npm run start
 ```
 
 ### Run the Front-End with hot reload
